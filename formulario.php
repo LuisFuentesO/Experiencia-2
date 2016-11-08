@@ -380,31 +380,9 @@ $error = '';
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Formulario</h1>
-<!--                    <form enctype="multipart/form-data" method="post" action="formulario.php" accept-charset="UTF-8"> -->
                 </div>
-                <!-- /.col-lg-12 -->
+            <!-- /.col-lg-12 -->
             </div>
-            <div class="row"><?php
-                //Mostrar contenido
-                if($enviado == 1) {
-                    echo '<pre>';
-                    print_r($_POST);
-                    echo '</pre>';
-                    exit;
-                }else if(empty($nombre)) {
-                    $error = 'Debe ingresar su Nombre.';
-                } else if(empty($apellido)) {
-                    $error = 'Debe ingresar su RUT.';
-                } else if(empty($nacimiento)) {
-                    $error = 'Debe ingresar su Fecha de nacimiento';
-                } else if(empty($sexo)) {
-                    $error = 'Debe ingresar su sexo';
-                }
-                // Vista de error
-            if(!empty($error)) {
-            ?>
-
-
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -414,7 +392,23 @@ $error = '';
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6"> <?php
+                                    if($enviado == 1) {
+                                        echo '<pre>';
+                                        print_r($_POST);
+                                        echo '</pre>';
+                                        exit;
+                                    }else if(empty($nombre)) {
+                                        $error = 'Debe ingresar su Nombre.';
+                                    } else if(empty($apellido)) {
+                                        $error = 'Debe ingresar su RUT.';
+                                    } else if(empty($nacimiento)) {
+                                        $error = 'Debe ingresar su Fecha de nacimiento';
+                                    } else if(empty($sexo)) {
+                                        $error = 'Debe ingresar su sexo';
+                                    }
+                                    if(!empty($error)){
+                                    ?>
                                     <div class="alert alert-info">
                                         <i class="glyphicon glyphicon-info-sign"></i>
                                         <?php echo $error; ?>
@@ -422,30 +416,31 @@ $error = '';
                                     <a href="./" class="btn btn-warning">
                                         <i class="glyphicon glyphicon-chevron-left"></i>
                                         Volver
-                                    </a>
+                                    </a><?php
                                     } else {
+                                    ?>
                                     <h3>¡Formulario enviado satisfactoriamente!</h3>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Datos enviados</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <p> Muchas gracias, <b><?php echo $nombre; ?> </b> <b><?php echo $apellido; ?> </b></p>
-                                                <p> La siguiente información ha sido registrada: </p>
-                                                <p> Fecha de nacimiento:  <b><?php echo $nacimiento; ?></b></p>
-                                                <p>Sexo: <b><?php 
-                                                if ($sexo == 'm' ){
-                                                    echo 'Masculino';
-                                                }else{
-                                                    echo 'Femenino';
-                                                } 
-                                                ?></b></p>
-                                                <p> Área de interés: <b><?php echo $area; ?></b></p>
-                                                <p> Página personal: <b><?php echo $personal; ?></b></p>
-                                                <p> Correo electrónico: <b><?php echo $correo; ?></b></p>
-                                                <p> Color favorito: <b><?php echo $color; ?></b></p>
-                                            </div>
-                                            <div class="panel-footer">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Datos enviados</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p> Muchas gracias, <b><?php echo $nombre; ?> </b> <b><?php echo $apellido; ?> </b></p>
+                                            <p> La siguiente información ha sido registrada: </p>
+                                            <p> Fecha de nacimiento:  <b><?php echo $nacimiento; ?></b></p>
+                                            <p>Sexo: <b><?php 
+                                            if ($sexo == 'm' ){
+                                                echo 'Masculino';
+                                            }else{
+                                                echo 'Femenino';
+                                            } 
+                                            ?></b></p>
+                                            <p> Área de interés: <b><?php echo $area; ?></b></p>
+                                            <p> Página personal: <b><?php echo $personal; ?></b></p>
+                                            <p> Correo electrónico: <b><?php echo $correo; ?></b></p>
+                                            <p> Color favorito: <b><?php echo $color; ?></b></p>
+                                        </div>
+                                        <div class="panel-footer">
                                             <div class="text-right">
                                             <a href="./" class="btn btn-primary">
                                                 <i class="glyphicon glyphicon-chevron-left"></i>
@@ -471,7 +466,6 @@ $error = '';
             <!-- /.row -->
          </div>
         <!-- /#page-wrapper -->
-        </div>
     </div>
     <!-- /#wrapper -->
 
