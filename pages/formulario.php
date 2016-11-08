@@ -5,7 +5,6 @@ function Filtro($texto) {
 }
 
 $directorio = 'D:/xampp/htdocs/Experiencia 2';
-$enviado = isset($_POST['enviado']) ? (int) $_POST['enviado'] : 0;
 $nombre = isset($_POST['nombre']) ? Filtro($_POST['nombre']) : '';
 $apellido = isset($_POST['apellido']) ? Filtro($_POST['apellido']) : '';
 $nacimiento = isset($_POST['nacimiento']) ? Filtro($_POST['nacimiento']) : '';
@@ -44,10 +43,10 @@ $error = '';
 </head>
 
 <body>
-    <div id="wrapper">
+  <div id="wrapper">
         <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -376,35 +375,44 @@ $error = '';
             <!-- /.navbar-static-side -->
         </nav>
 
+        <?php
+        //Mostrar contenido
+        if($enviado == 1 && $contenido == 1) {
+          echo '<pre>';
+          print_r($_POST);
+          echo '</pre>';
+        exit;
+        } else if(empty($nombre)) {
+          $error = 'Debe ingresar su Nombre.';
+        } else if(empty($apellido)) {
+          $error = 'Debe ingresar su RUT.';
+        } else if(empty($nacimiento)) {
+          $error = 'Debe ingresar su Fecha de nacimiento';
+        } else if(empty($sexo)) {
+          $error = 'Debe ingresar su sexo';
+        } else if(empty($alcalde)) {
+          $error = 'Debe ingresar su alcalde.';
+        } else if(empty($concejal)) {
+          $error = 'Debe ingresar su concejal.';
+        }
+        // Vista de error
+        if(!empty($error)) {
+        ?>
+        <div class="alert alert-info">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          <?php echo $error; ?>
+        </div>
+
+
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Formulario</h1>
-<!--                    <form enctype="multipart/form-data" method="post" action="formulario.php" accept-charset="UTF-8"> -->
+                 <form enctype="multipart/form-data" method="post" action="formulario.php" accept-charset="UTF-8">
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div class="row"><?php
-                //Mostrar contenido
-                if($enviado == 1) {
-                    echo '<pre>';
-                    print_r($_POST);
-                    echo '</pre>';
-                    exit;
-                }else if(empty($nombre)) {
-                    $error = 'Debe ingresar su Nombre.';
-                } else if(empty($apellido)) {
-                    $error = 'Debe ingresar su RUT.';
-                } else if(empty($nacimiento)) {
-                    $error = 'Debe ingresar su Fecha de nacimiento';
-                } else if(empty($sexo)) {
-                    $error = 'Debe ingresar su sexo';
-                }
-                // Vista de error
-            if(!empty($error)) {
-            ?>
-
-
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -415,15 +423,6 @@ $error = '';
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="alert alert-info">
-                                        <i class="glyphicon glyphicon-info-sign"></i>
-                                        <?php echo $error; ?>
-                                    </div>
-                                    <a href="./" class="btn btn-warning">
-                                        <i class="glyphicon glyphicon-chevron-left"></i>
-                                        Volver
-                                    </a>
-                                    } else {
                                     <h3>¡Formulario enviado satisfactoriamente!</h3>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -469,9 +468,9 @@ $error = '';
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-         </div>
-        <!-- /#page-wrapper -->
         </div>
+        <!-- /#page-wrapper -->
+
     </div>
     <!-- /#wrapper -->
 
